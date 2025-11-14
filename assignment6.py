@@ -1,5 +1,5 @@
 def calculate_product_revenue(product_tuple):
-    _,_, price, units_sold = product_tuple
+    id, category, price, units_sold = product_tuple
     return price * units_sold
 def find_top_revenue_product(products):
     top_revenue = 0
