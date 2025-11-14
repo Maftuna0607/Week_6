@@ -1,6 +1,8 @@
 def calculate_product_revenue(product_tuple):
     id, category, price, units_sold = product_tuple
     return price * units_sold
+
+
 def find_top_revenue_product(products):
     top_revenue = 0
     top_product = ""
@@ -13,13 +15,17 @@ def find_top_revenue_product(products):
             if product[0] < top_product:
                 top_product = product[0]
     return top_product
+
+
 def get_products_in_category(products, category_name):
-    new=[]
+    new = []
     for product in products:
         if product[1] == category_name:
             new.append(product[0])
     new.sort()
     return new
+
+
 def get_category_sales_summary(products):
     categories = []
     totals = [] 
@@ -37,11 +43,17 @@ def get_category_sales_summary(products):
         summary.append((categories[i], totals[i]))
     summary.sort()
     return summary
-def analyze_products(products):
+
+
+def analyze_products(products, target_category):
     top = find_top_revenue_product(products)
-    electronics = get_products_in_category(products, 'Electronics')
+    category_products = get_products_in_category(products, target_category)
     summary = get_category_sales_summary(products)
-    return (top, electronics, summary)
+
+    if not category_products:
+        print(f"Warning: No products found in category '{target_category}'.")
+
+    return (top, category_products, summary)
 
 products = [
     ('P101', 'Electronics', 799.99, 150),
@@ -50,8 +62,9 @@ products = [
     ('P301', 'Home Goods', 120.00, 800),
     ('P206', 'Books', 19.99, 650)
 ]
-
-result = analyze_products(products)
+print(f"Available categories: Books, Electronics, Home Goods")
+target_category= input("Enter the category name: ")
+result = analyze_products(products, target_category)
 print(result)
 
 
